@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-echo "Not implemented yet!"
+cat /dev/urandom | tr "0" "1"
 

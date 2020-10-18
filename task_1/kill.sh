@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
-echo "Not implemented yet!"
-
+correct_pid=$(pgrep -f "$1" | head -n 1)
+echo "Killed $correct_pid"
+kill "$correct_pid"
