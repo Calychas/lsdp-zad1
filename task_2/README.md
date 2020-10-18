@@ -4,26 +4,26 @@
 Proof that you can use Vim:
 - find an expression
   ```text
-  Answer:
+  Answer: /<expression> or ?<expression>
   ```
 - jump to line
   ```text
-  Answer:
+  Answer: <line number> + Shift+G
   ```
 - substitute a single character
   ```text
-  Answer:
+  Answer: r<character>
   ```
 - substitute a whole expression
   ```text
-  Answer:
+  Answer: :s/<old>/<new>
   ```
 - save changes
   ```text
-  Answer:
+  Answer: :w
   ```
 - exit Vim (2 ways)
   ```text
-  Answer:
+  Answer: :q, :q!, :wq
   ```
 

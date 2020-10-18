@@ -4,6 +4,7 @@ FROM nginx:$VERSION
 RUN apt-get install -y curl
 ENV name="/home"
 
+#instead of ADD which is discouraged
 COPY README.md $name
 
 CMD ["Kacper"]

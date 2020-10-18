@@ -17,6 +17,7 @@ services:
     restart: on-failure
     networks:
       - backend
+
   client:
     image: curlimages/curl:7.73.0
     command: "web:80"
