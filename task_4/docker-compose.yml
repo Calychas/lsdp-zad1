@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  web:
+    image: nginx:1.19.3
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
+    ports:
+      - "5000:80"
+    expose:
+      - "80"
+    restart: on-failure
+    networks:
+      - backend
+  client:
+    image: curlimages/curl:7.73.0
+    command: "web:80"
+    depends_on:
+      - web
+    networks:
+      - backend
+
+networks: #instead of links which is discouraged
+    backend:
