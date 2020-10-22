@@ -67,6 +67,7 @@ def save_results(results: pd.DataFrame) -> None:
 
 def make_plot(results: pd.DataFrame) -> None:
     fig = px.line(results, x="size", y="time", color="name")
+    fig.write_html("../results/results.html")
     fig.show(renderer="firefox")
 
 
