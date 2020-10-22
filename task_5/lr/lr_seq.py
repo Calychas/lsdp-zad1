@@ -17,8 +17,9 @@ class LinearRegressionSequential(base.LinearRegression):
             sum_x2 += pow(var_x, 2)
             sum_xy += var_x * var_y
 
-        a = (n * sum_xy - sum_x * sum_y) / (n * sum_x2 - pow(sum_x, 2))
-        b = (sum_y * sum_x2 - sum_x * sum_xy) / (n * sum_x2 - pow(sum_x, 2))
+        denominator = n * sum_x2 - pow(sum_x, 2)
+        a = (n * sum_xy - sum_x * sum_y) / denominator
+        b = (sum_y * sum_x2 - sum_x * sum_xy) / denominator
         self._coef = (b, a)
 
         return self

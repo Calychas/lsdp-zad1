@@ -75,8 +75,8 @@ def main() -> None:
 
 
     models = [
-        lr.LinearRegressionSequential,
-        # lr.LinearRegressionNumpy,
+        # lr.LinearRegressionSequential,
+        lr.LinearRegressionNumpy,
         # lr.LinearRegressionProcess,
         # lr.LinearRegressionThreads,
     ]
