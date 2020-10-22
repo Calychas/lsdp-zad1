@@ -75,10 +75,10 @@ def main() -> None:
 
 
     models = [
-        # lr.LinearRegressionSequential,
+        lr.LinearRegressionSequential,
         lr.LinearRegressionNumpy,
-        # lr.LinearRegressionProcess,
-        # lr.LinearRegressionThreads,
+        lr.LinearRegressionThreads,
+        lr.LinearRegressionProcess,
     ]
 
     results = run_experiments(models, datasets)

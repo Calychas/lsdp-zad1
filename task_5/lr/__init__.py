@@ -9,5 +9,5 @@ __all__ = [
     'LinearRegressionNumpy',
     'LinearRegressionProcess',
     'LinearRegressionSequential',
-    'LinearRegressionThreads',
+    'LinearRegressionThreads'
 ]
