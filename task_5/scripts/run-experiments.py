@@ -12,6 +12,9 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from timeit import default_timer as timer
+import plotly.express as px
+from tqdm.auto import tqdm
 
 import lr
 
@@ -39,29 +42,32 @@ def run_experiments(
     datasets: List[Tuple[List[float], List[float]]],
 ) -> pd.DataFrame:
 
-    for dataset in datasets:
+    cols = ["name", "size", "time"]
+    experiment_data = []
+    for dataset in tqdm(datasets):
         X, y = dataset
         n = len(X)
-        indicies = list(range(n))
-        random.shuffle(indicies)
-        split_index = math.ceil(len(X) * 0.8)
-
-        X_shuffled, y_shuffled = (list(np.array(X)[indicies]), list(np.array(y)[indicies]))
-
-        X_train, X_val = (X_shuffled[:split_index], X_shuffled[split_index:])
-        y_train, y_val = (y_shuffled[:split_index], y_shuffled[split_index:])
+        X_train, y_train = X, y
         for model_cons in models:
             model = model_cons()
-            model.fit(X_train, y_train)
-            y_pred = model.predict(X_val)
-            sns.scatterplot(x=X_val, y=y_val)
-            sns.scatterplot(x=X_val, y=y_pred)
-            plt.show()
+            model_name = model.get_name()
 
-    return pd.DataFrame()
+            start = timer()
+            model.fit(X_train, y_train)
+            end = timer()
+            time_elapsed = end - start
+
+            experiment_data.append([model_name, n, time_elapsed])
+
+    return pd.DataFrame(data=experiment_data, columns=cols)
+
+
+def save_results(results: pd.DataFrame) -> None:
+    results.to_csv("../results/results.csv")
 
 def make_plot(results: pd.DataFrame) -> None:
-    pass
+    fig = px.line(results, x="size", y="time", color="name")
+    fig.show(renderer="firefox")
 
 
 def main() -> None:
@@ -71,7 +77,7 @@ def main() -> None:
     args = get_args()
     datasets_dir = args.datasets_dir
     file_paths = list(map(lambda p: os.path.join(datasets_dir, p), os.listdir(datasets_dir)))
-    datasets = get_datasets(file_paths[:1])  # FIXME
+    datasets = get_datasets(file_paths)
 
 
     models = [
@@ -82,7 +88,8 @@ def main() -> None:
     ]
 
     results = run_experiments(models, datasets)
-
+    results.sort_values("size", axis=0, inplace=True)
+    save_results(results)
     make_plot(results)
 
 

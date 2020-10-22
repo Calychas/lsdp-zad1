@@ -4,6 +4,10 @@ from lr import base
 
 
 class LinearRegressionSequential(base.LinearRegression):
+
+    def get_name(self) -> str:
+        return "Sequential"
+
     def fit(self, X: List[float], y: List[float]) -> base.LinearRegression:
         n = len(X)
         sum_x = 0

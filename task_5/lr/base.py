@@ -21,6 +21,10 @@ class LinearRegression(ScikitPredictor):
         self._coef = None
 
     @abc.abstractmethod
+    def get_name(self) -> str:
+        pass
+
+    @abc.abstractmethod
     def fit(self, X: List[float], y: List[float]) -> LinearRegression:
         pass
 

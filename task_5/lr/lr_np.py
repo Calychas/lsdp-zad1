@@ -5,6 +5,9 @@ import numpy as np
 
 
 class LinearRegressionNumpy(base.LinearRegression):
+    def get_name(self) -> str:
+        return "Numpy"
+
     def fit(self, X: List[float], y: List[float]) -> base.LinearRegression:
         X = np.array(X)[:, None]
         X = np.hstack((np.ones_like(X), X))
